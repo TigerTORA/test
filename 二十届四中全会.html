@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中共二十届四中全会 | 十五五规划建议</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --red-primary: #C8102E;
+            --gold: #FFD700;
+            --black: #1a1a1a;
+            --gray-dark: #333333;
+            --gray-mid: #666666;
+            --gray-light: #f5f5f5;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 第一屏：标题冲击 */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--red-primary) 0%, #8B0000 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .hero-meta {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 3rem;
+            letter-spacing: 0.1em;
+        }
+
+        .hero-summary {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            color: rgba(255,255,255,0.95);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 2;
+            font-weight: 300;
+            padding: 2rem;
+            border-left: 4px solid var(--gold);
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* 容器 */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* 章节标题 */
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            color: var(--red-primary);
+            margin-bottom: 3rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: var(--gold);
+        }
+
+        /* 时间轴对比 */
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-bottom: 5rem;
+        }
+
+        .timeline-card {
+            background: var(--gray-light);
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .timeline-card::before {
+            content: attr(data-period);
+            position: absolute;
+            top: -15px;
+            left: 2rem;
+            background: var(--red-primary);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+        }
+
+        .timeline-card h3 {
+            font-size: 1.5rem;
+            color: var(--gray-dark);
+            margin: 1.5rem 0 1rem;
+            font-weight: 700;
+        }
+
+        .timeline-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .timeline-card li {
+            padding: 0.8rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--gray-mid);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .timeline-card li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        /* 目标卡片 */
+        .goals {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .goal-card {
+            background: linear-gradient(135deg, var(--white) 0%, var(--gray-light) 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .goal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--red-primary), var(--gold));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .goal-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .goal-card:hover {
+            border-color: var(--red-primary);
+            box-shadow: 0 8px 30px rgba(200, 16, 46, 0.15);
+        }
+
+        .goal-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--red-primary);
+            opacity: 0.1;
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+        }
+
+        .goal-card h4 {
+            font-size: 1.3rem;
+            color: var(--red-primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .goal-card p {
+            color: var(--gray-mid);
+            line-height: 1.8;
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 重点领域网格 */
+        .focus-areas {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .area-card {
+            background: var(--white);
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .area-card:hover {
+            border-color: var(--red-primary);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .area-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--red-primary);
+            color: var(--white);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .area-card h4 {
+            font-size: 1.4rem;
+            color: var(--black);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .area-card p {
+            color: var(--gray-mid);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .area-keywords {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .keyword {
+            background: var(--gray-light);
+            color: var(--gray-dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* 人事变动 */
+        .personnel {
+            background: var(--gray-light);
+            padding: 3rem;
+            border-radius: 12px;
+            margin-bottom: 5rem;
+        }
+
+        .personnel h3 {
+            font-size: 1.8rem;
+            color: var(--red-primary);
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .personnel-item {
+            background: var(--white);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .personnel-item strong {
+            color: var(--red-primary);
+            font-size: 1.1rem;
+        }
+
+        /* 号召结束 */
+        .call-to-action {
+            background: linear-gradient(135deg, var(--black) 0%, var(--gray-dark) 100%);
+            color: var(--white);
+            padding: 5rem 2rem;
+            text-align: center;
+            border-radius: 16px;
+        }
+
+        .call-to-action h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 2rem;
+            color: var(--gold);
+        }
+
+        .call-to-action p {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            line-height: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .timeline,
+            .goals,
+            .focus-areas {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .personnel {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* 移动优先：大字短行 */
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.2rem;
+                letter-spacing: 0.02em;
+            }
+
+            .hero-meta {
+                font-size: 1rem;
+            }
+
+            .hero-summary {
+                font-size: 0.95rem;
+                padding: 1.5rem;
+            }
+
+            .area-card,
+            .goal-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 第一屏：冲击力 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">中共二十届四中全会</h1>
+            <div class="hero-meta">2025.10.20-23 · 北京</div>
+            <div class="hero-summary">
+                审议通过《中共中央关于制定国民经济和社会发展第十五个五年规划的建议》<br>
+                擘画中国式现代化新蓝图
+            </div>
+        </div>
+        <div class="scroll-hint">▼ 向下滚动</div>
+    </section>
+
+    <!-- 成就与目标对比 -->
+    <div class="container">
+        <h2 class="section-title">承前启后</h2>
+        <div class="timeline">
+            <div class="timeline-card" data-period="十四五">
+                <h3>历程极不寻常</h3>
+                <ul>
+                    <li>经受住世纪疫情严重冲击</li>
+                    <li>经济实力跃上新台阶</li>
+                    <li>科技实力显著增强</li>
+                    <li>中国式现代化迈出坚实步伐</li>
+                    <li>第二个百年奋斗目标新征程实现良好开局</li>
+                </ul>
+            </div>
+
+            <div class="timeline-card" data-period="十五五">
+                <h3>基本实现社会主义现代化夯实基础</h3>
+                <ul>
+                    <li>高质量发展取得显著成效</li>
+                    <li>科技自立自强水平大幅提高</li>
+                    <li>全面深化改革取得新突破</li>
+                    <li>社会文明程度明显提升</li>
+                    <li>人民生活品质不断提高</li>
+                    <li>美丽中国建设取得新的重大进展</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 六项原则 -->
+        <h2 class="section-title">六项原则</h2>
+        <div class="goals">
+            <div class="goal-card">
+                <span class="goal-number">01</span>
+                <h4>坚持党的全面领导</h4>
+                <p>确保中国式现代化正确方向</p>
+            </div>
+            <div class="goal-card">
+                <span class="goal-number">02</span>
+                <h4>坚持人民至上</h4>
+                <p>满足人民日益增长的美好生活需要</p>
+            </div>
+            <div class="goal-card">
+                <span class="goal-number">03</span>
+                <h4>坚持高质量发展</h4>
+                <p>推动经济质的有效提升和量的合理增长</p>
+            </div>
+            <div class="goal-card">
+                <span class="goal-number">04</span>
+                <h4>坚持全面深化改革</h4>
+                <p>以改革创新为根本动力</p>
+            </div>
+            <div class="goal-card">
+                <span class="goal-number">05</span>
+                <h4>有效市场与有为政府</h4>
+                <p>完善社会主义市场经济体制</p>
+            </div>
+            <div class="goal-card">
+                <span class="goal-number">06</span>
+                <h4>统筹发展和安全</h4>
+                <p>确保国家长治久安</p>
+            </div>
+        </div>
+
+        <!-- 12个重点领域 -->
+        <h2 class="section-title">十二项重点部署</h2>
+        <div class="focus-areas">
+            <div class="area-card">
+                <div class="area-number">1</div>
+                <h4>建设现代化产业体系</h4>
+                <p>坚持把发展经济的着力点放在实体经济上，加快建设制造强国、质量强国、航天强国、交通强国、网络强国。</p>
+                <div class="area-keywords">
+                    <span class="keyword">智能化</span>
+                    <span class="keyword">绿色化</span>
+                    <span class="keyword">融合化</span>
+                </div>
+            </div>
+
+            <div class="area-card">
+                <div class="area-number">2</div>
+                <h4>高水平科技自立自强</h4>
+                <p>统筹教育强国、科技强国、人才强国建设,抢占科技发展制高点,催生新质生产力。</p>
+                <div class="area-keywords">
+                    <span class="keyword">原始创新</span>
+                    <span class="keyword">核心技术攻关</span>
+                    <span class="keyword">数字中国</span>
+                </div>
+            </div>
+
+            <div class="area-card">
+                <div class="area-number">3</div>
+                <h4>建设强大国内市场</h4>
+                <p>坚持扩大内需战略基点,以新需求引领新供给,促进消费和投资良性互动。</p>
+                <div class="area-keywords">
+                    <span class="keyword">提振消费</span>
+                    <span class="keyword">扩大投资</span>
+                    <span class="keyword">统一大市场</span>
+                </div>
+            </div>
+
+            <div class="area-card">
+                <div class="area-number">4</div>
+                <h4>高水平社会主义市场经济体制</h4>
+                <p>完善宏观经济治理体系,激发各类经营主体活力,确保高质量发展行稳致远。</p>
+                <div class="area-keywords">
+                    <span class="keyword">要素市场化</span>
+                    <span class="keyword">宏观治理</span>
+                </div>
+            </div>
+
+            <div class="area-card">
+                <div class="area-number">5</div>
+                <h4>扩大高水平对外开放</h4>
+                <p>稳步扩大制度型开放,拓展国际循环,高质量共建"一带一路"。</p>
+                <div class="area-keywords">
+                    <span class="keyword">贸易创新</span>
+                    <span class="keyword">双向投资</span>
+                    <span class="keyword">一带一路</span>
+                </div>
+            </div>
+
+            <div class="area-card">
+                <div class="area-number">6</div>
+                <h4>农业农村现代化</h4>
+                <p>坚持把"三农"问题作为全党工作重中之重,扎实推进乡村全面振兴。</p>
+                <div class="area-keywords">
+                    <span class="keyword">和美乡村</span>
+                    <span class="keyword">农业强国</span>
+                </div>
+            </div>
+
+            <div class="area-card">
+                <div class="area-number">7</div>
+                <h4>优化区域经济布局</h4>
+                <p>发挥多重战略叠加效应,优化重大生产力布局,深入推进新型城镇化。</p>
+                <div class="area-keywords">
+                    <span class="keyword">区域协调</span>
+                    <span class="keyword">以人为本</span>
+                    <span class="keyword">海洋开发</span>
+                </div>
+            </div>
+
+            <div class="area-card">
+                <div class="area-number">8</div>
+                <h4>繁荣发展社会主义文化</h4>
+                <p>发展具有强大引领力、凝聚力、感召力、影响力的新时代中国特色社会主义文化。</p>
+                <div class="area-keywords">
+                    <span class="keyword">核心价值观</span>
+                    <span class="keyword">文化强国</span>
+                    <span class="keyword">文明传播</span>
+                </div>
+            </div>
+
+            <div class="area-card">
+                <div class="area-number">9</div>
+                <h4>保障和改善民生</h4>
+                <p>解决人民群众急难愁盼问题,扎实推进全体人民共同富裕。</p>
+                <div class="area-keywords">
+                    <span class="keyword">高质量就业</span>
+                    <span class="keyword">教育优先</span>
+                    <span class="keyword">健康中国</span>
+                </div>
+            </div>
+
+            <div class="area-card">
+                <div class="area-number">10</div>
+                <h4>建设美丽中国</h4>
+                <p>以碳达峰碳中和为牵引,协同推进降碳、减污、扩绿、增长。</p>
+                <div class="area-keywords">
+                    <span class="keyword">绿水青山</span>
+                    <span class="keyword">双碳目标</span>
+                    <span class="keyword">新型能源</span>
+                </div>
+            </div>
+
+            <div class="area-card">
+                <div class="area-number">11</div>
+                <h4>平安中国建设</h4>
+                <p>贯彻总体国家安全观,确保社会生机勃勃又井然有序。</p>
+                <div class="area-keywords">
+                    <span class="keyword">国家安全</span>
+                    <span class="keyword">公共安全</span>
+                    <span class="keyword">社会治理</span>
+                </div>
+            </div>
+
+            <div class="area-card">
+                <div class="area-number">12</div>
+                <h4>国防和军队现代化</h4>
+                <p>如期实现建军一百年奋斗目标,加快机械化信息化智能化融合发展。</p>
+                <div class="area-keywords">
+                    <span class="keyword">强军思想</span>
+                    <span class="keyword">战斗力</span>
+                    <span class="keyword">军事治理</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 人事变动 -->
+        <div class="personnel">
+            <h3>人事任免</h3>
+            <div class="personnel-item">
+                <strong>增补任命：</strong>张升民为中共中央军事委员会副主席
+            </div>
+            <div class="personnel-item">
+                <strong>递补中委：</strong>于会文、马汉成、王健、王曦、王永红、王庭凯、王新伟、韦韬、邓亦武、邓修明、卢红等11人递补为中央委员会委员
+            </div>
+            <div class="personnel-item">
+                <strong>纪律处分：</strong>确认给予何卫东、苗华、唐仁健、金湘军、何宏军、王秀斌、林向阳、秦树桐、袁华智、王春宁、李石松、杨发森、朱芝松、张凤中等开除党籍处分
+            </div>
+        </div>
+
+        <!-- 号召 -->
+        <div class="call-to-action">
+            <h2>团结奋斗</h2>
+            <p>
+                全党全军全国各族人民更加紧密地团结在以习近平同志为核心的党中央周围，<br>
+                为基本实现社会主义现代化而共同奋斗，<br>
+                不断开创以中国式现代化全面推进强国建设、民族复兴伟业新局面。
+            </p>
+        </div>
+    </div>
+</body>
+</html>
